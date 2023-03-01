@@ -58,4 +58,16 @@ public class UserService {
         User user = userRepository.getUserByEmail(email);
         return new UserResponseDto(user);
     }
+
+    public Long delete(Long id) {
+        User deleteUser = userRepository.getReferenceById(id);
+        userRepository.delete(deleteUser);
+        return id;
+    }
+
+
+    public Long updateUserEnabledStatus(Long id, boolean enabled) {
+        userRepository.updateEnabledStatus(id, enabled);
+        return id;
+    }
 }

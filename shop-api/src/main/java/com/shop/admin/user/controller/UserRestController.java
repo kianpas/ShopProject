@@ -27,19 +27,25 @@ public class UserRestController {
     
     //전체 유저 조회
     @GetMapping("/api/users/userList")
-    public List<UserResponseDto> listAll() {
-        return userService.listAll();
+    public ResponseEntity<List<UserResponseDto>> listAll() throws RuntimeException {
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.listAll());
     }
     
     //한명 조회
     @GetMapping("/api/user/{id}")
-    public UserResponseDto selectOneUser(@PathVariable(name = "id") Long id) {
-        return userService.refById(id);
+    public ResponseEntity<UserResponseDto> selectOneUser(@PathVariable(name = "id") Long id) throws RuntimeException {
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.refById(id));
     }
 
     //신규 유저 등록
     @PostMapping(path = "/api/newUser")
-    public Long newUserSave(@ModelAttribute UserSaveDto userSaveDto,
+    public ResponseEntity<Long> newUserSave(@ModelAttribute UserSaveDto userSaveDto,
                             @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         Long savedUserId;
         if(file != null && !file.isEmpty() && file.getOriginalFilename() != null){
@@ -52,20 +58,49 @@ public class UserRestController {
         } else {
             savedUserId = userService.save(userSaveDto);
         }
-        return savedUserId;
+
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+
+        return ResponseEntity.ok().headers(resHeader).body(savedUserId);
     }
 
     //유저 수정
     @PutMapping("/api/edit")
-    public Long editUser(@RequestBody UserUpdateDto userUpdateDto) {
-        return userService.edit(userUpdateDto);
+    public ResponseEntity<Long> editUser(@RequestBody UserUpdateDto userUpdateDto) throws RuntimeException {
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.edit(userUpdateDto));
     }
 
-    //개별 유저 조회
+    //로그인한 유저 조회
     @GetMapping("/api/account")
-    public UserResponseDto viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser) {
+    public ResponseEntity<UserResponseDto> viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser) throws RuntimeException {
         String email = loggedUser.getUsername();
-        return userService.getByEmail(email);
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.getByEmail(email));
+    }
+
+    //유저 삭제
+    @DeleteMapping("/api/delete/{id}")
+    public ResponseEntity<Long> delete(@PathVariable(name = "id") Long id) throws RuntimeException {
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.delete(id));
+    }
+
+    @PutMapping("/api/users/{id}/enabled/{status}")
+    public ResponseEntity<Long> editUser(@PathVariable(name = "id") Long id,
+                                         @PathVariable(name = "status") boolean enabled) {
+        HttpHeaders resHeader = new HttpHeaders();
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+        resHeader.set("resCd", "200");
+        return ResponseEntity.ok().headers(resHeader).body(userService.updateUserEnabledStatus(id, enabled));
     }
 
     //Runtime Error 핸들링
@@ -73,7 +108,7 @@ public class UserRestController {
     public ResponseEntity<String> handleUserRuntimeExceptions(RuntimeException e){
         log.debug("유저 컨트롤러에서 생긴 문제입니다. : {}", e.getMessage(), e);
         HttpHeaders resHeader = new HttpHeaders();
-        resHeader.set("Content-Type", "application/json");
+        resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
         resHeader.set("resCd", "405");
         return ResponseEntity.badRequest().headers(resHeader).body(e.getMessage());
     }
