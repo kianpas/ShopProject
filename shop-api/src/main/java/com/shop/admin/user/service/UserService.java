@@ -1,11 +1,11 @@
-package org.shop.admin.user.service;
+package com.shop.admin.user.service;
 
+import com.shop.admin.user.UserRepository;
+import com.shop.admin.user.service.web.dto.UserUpdateDto;
 import com.shop.common.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.shop.admin.user.UserRepository;
-import org.shop.admin.user.service.web.dto.UserResponseDto;
-import org.shop.admin.user.service.web.dto.UserSaveDto;
-import org.shop.admin.user.service.web.dto.UserUpdateDto;
+import com.shop.admin.user.service.web.dto.UserResponseDto;
+import com.shop.admin.user.service.web.dto.UserSaveDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +52,10 @@ public class UserService {
 
     public Long edit(UserUpdateDto userUpdateDto) {
         return userRepository.save(userUpdateDto.toEntity()).getId();
+    }
+
+    public UserResponseDto getByEmail(String email) {
+        User user = userRepository.getUserByEmail(email);
+        return new UserResponseDto(user);
     }
 }

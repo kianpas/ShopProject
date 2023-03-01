@@ -1,14 +1,16 @@
-package org.shop.admin.user.controller;
+package com.shop.admin.user.controller;
 
+import com.shop.admin.security.ShopmeUserDetails;
+import com.shop.admin.user.service.UserService;
+import com.shop.admin.user.service.web.dto.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.shop.admin.FileUploadUtil;
-import org.shop.admin.user.service.UserService;
-import org.shop.admin.user.service.web.dto.UserResponseDto;
-import org.shop.admin.user.service.web.dto.UserSaveDto;
-import org.shop.admin.user.service.web.dto.UserUpdateDto;
+import com.shop.admin.util.FileUploadUtil;
+import com.shop.admin.user.service.web.dto.UserResponseDto;
+import com.shop.admin.user.service.web.dto.UserSaveDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,6 +59,13 @@ public class UserRestController {
     @PutMapping("/api/edit")
     public Long editUser(@RequestBody UserUpdateDto userUpdateDto) {
         return userService.edit(userUpdateDto);
+    }
+
+    //개별 유저 조회
+    @GetMapping("/api/account")
+    public UserResponseDto viewDetails(@AuthenticationPrincipal ShopmeUserDetails loggedUser) {
+        String email = loggedUser.getUsername();
+        return userService.getByEmail(email);
     }
 
     //Runtime Error 핸들링
