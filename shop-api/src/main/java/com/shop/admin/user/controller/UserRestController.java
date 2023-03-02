@@ -44,7 +44,7 @@ public class UserRestController {
     }
 
     //신규 유저 등록
-    @PostMapping(path = "/api/newUser")
+    @PostMapping("/api/newUser")
     public ResponseEntity<Long> newUserSave(@ModelAttribute UserSaveDto userSaveDto,
                             @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
         Long savedUserId;
