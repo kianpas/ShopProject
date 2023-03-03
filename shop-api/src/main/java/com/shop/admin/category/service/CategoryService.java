@@ -19,41 +19,25 @@ public class CategoryService {
 	private final CategoryRepository categoryRepository;
 
 	//전체 카테고리 조회
-	public List<CategoryResponseDto> findAllCat() {
-		
-		List<CategoryResponseDto> categoryList = categoryRepository.findAllCategory()
+	public List<CategoryResponseDto> findAllCategory() {
+		List<CategoryResponseDto> categoryList = categoryRepository.findAll()
 											.stream()
 											.map(CategoryResponseDto::new)
 											.collect(Collectors.toList());
-		
-		List<SubCategoryResponseDto> tempList;
-		
-		for(CategoryResponseDto cat : categoryList) {
-			tempList = getSubCategory(cat.getId());
-			cat.setSubCategory(tempList);
-		}
-		
+
 		return categoryList;
 	}
+
+
 	
 	//하위 카테고리 조회
-	public List<SubCategoryResponseDto> getSubCategory(Long id) {
-		return categoryRepository.getSubCategory(id)
+	public List<CategoryResponseDto> getSubCategory(int depth) {
+		return categoryRepository.findSubCategory(depth)
 				.stream()
-				.map(SubCategoryResponseDto::new)
+				.map(CategoryResponseDto::new)
 				.collect(Collectors.toList());
 	}
 
-	//사용 X
-//	public List<CategoryResponseDto> findAllCatTest() {
-//
-//		List<CategoryResponseDto> catList = categoryRepository.findAllCategory()
-//		List<CategoryResponseDto> catList = categoryRepository.findAll()
-//											.stream()
-//											.map(CategoryResponseDto::new)
-//											.collect(Collectors.toList());
-//		return catList;
-//	}
 
 	//카테고리 저장
     public Long save(CategorySaveDto categorySaveDto) {

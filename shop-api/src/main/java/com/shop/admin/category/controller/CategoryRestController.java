@@ -7,6 +7,7 @@ import com.shop.admin.user.service.web.dto.UserSaveDto;
 import com.shop.admin.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,15 +24,9 @@ public class CategoryRestController {
 
 	//전체 조회
 	@GetMapping("/api/category/categoryList")
-	public List<CategoryResponseDto> listAll() {
-		return categoryService.findAllCat();
+	public List<CategoryResponseDto> listAllCategory() {
+		return categoryService.findAllCategory();
 	}
-	
-	//전체 조회 테스트
-//	@GetMapping("/api/category/categoryListTest")
-//	public List<CategoryResponseDto> listAllTest() {
-//		return categoryService.findAllCatTest();
-//	}
 
 	//새 카테고리 추가
 	@PostMapping("/api/category/newCategory")
@@ -52,4 +47,8 @@ public class CategoryRestController {
 		return savedCategoryId;
 	}
 
+	@GetMapping("/api/category/subcategoryList/{depth}")
+	public List<CategoryResponseDto> listSubCategory(@PathVariable int depth) {
+		return categoryService.getSubCategory(depth);
+	}
 }

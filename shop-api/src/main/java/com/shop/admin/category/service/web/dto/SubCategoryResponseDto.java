@@ -15,7 +15,7 @@ public class SubCategoryResponseDto {
 	
 	private String image;
 	
-	private Long parentId;
+//	private Long parentId;
 	
 	
 	public SubCategoryResponseDto(Category entity) {
@@ -23,7 +23,7 @@ public class SubCategoryResponseDto {
 		this.name = entity.getName();
 		this.alias = entity.getAlias();
 		this.image = entity.getImage();
-		this.parentId = entity.getParent() != null ? entity.getParent().getId() : null;
+//		this.parentId = entity.getParent() != null ? entity.getParent().getId() : null;
 		
 		
 	}

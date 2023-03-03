@@ -30,19 +30,27 @@ public class Category {
 	private String image;
 	
 	private boolean enabled;
+
+	@ManyToMany
+	@JoinTable(
+			name="categories_relation",
+			joinColumns = @JoinColumn(name = "child_category_id"),
+			inverseJoinColumns = @JoinColumn(name = "parent_category_id"))
+	private Set<Category> categories;
 	
-	@OneToOne
-	@JoinColumn(name = "parent_id")
-	private Category parent;
-	
-	@OneToMany(mappedBy = "parent")
-	private Set<Category> children = new HashSet<>();
+//	@OneToOne
+//	@JoinColumn(name = "parent_id")
+//	private Category parent;
+//
+//	@OneToMany(mappedBy = "parent")
+//	private Set<Category> children = new HashSet<>();
 
 	@Builder
-	public Category(String name, String alias, String image, Category parent) {
+	public Category(Long id, String name, String alias, String image, Set<Category> categories) {
+		this.id = id;
 		this.name = name;
 		this.alias = alias;
 		this.image = image;
-		this.parent = parent;
+		this.categories = categories;
 	}
 }

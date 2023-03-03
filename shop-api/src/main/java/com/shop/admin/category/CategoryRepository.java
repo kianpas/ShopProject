@@ -11,10 +11,14 @@ import java.util.List;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long>{
 
-	@Query("select c from Category c left join fetch c.parent")
+	@Query("select c from Category c left join fetch c.categories")
 	public List<Category> findAllCategory();
+
+//	@Query("select c from Category c left join fetch c.categories where depth ")
+//	public List<Category> findMainCategory();
 	
-	@Query("select c from Category c where c.parent.id = ?1")
-	public List<Category> getSubCategory(Long id);
+	//c.categories -> Entity 필드명
+	@Query("select c from Category c left join fetch c.categories where depth = ?1")
+	public List<Category> findSubCategory(int depth);
 
 }
