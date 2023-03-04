@@ -47,6 +47,11 @@ public class CategoryRestController {
 		return savedCategoryId;
 	}
 
+	@GetMapping("/api/category/mainCategoryList/{depth}")
+	public List<CategoryResponseDto> listMainCategory(@PathVariable int depth) {
+		return categoryService.getMainCategory(depth);
+	}
+
 	@GetMapping("/api/category/subcategoryList/{depth}")
 	public List<CategoryResponseDto> listSubCategory(@PathVariable int depth) {
 		return categoryService.getSubCategory(depth);

@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.common.entity.Category;
 import lombok.Getter;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 public class CategoryResponseDto {
@@ -19,19 +21,17 @@ public class CategoryResponseDto {
 	
 	private String image;
 
-	private String parentCategoryId;
-
-	@JsonIgnore
-	private Set<Category> subCategory;
-	
-//	private List<SubCategoryResponseDto> subCategory;
+	private List<SubCategoryResponseDto> subCategory;
 	
 	public CategoryResponseDto(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.alias = entity.getAlias();
 		this.image = entity.getImage();
-		this.subCategory = entity.getCategories();
+		this.subCategory = entity.getCategories()
+							.stream()
+							.map(SubCategoryResponseDto::new)
+							.collect(Collectors.toList());
 	}
 	
 //	public void setSubCategory(List<SubCategoryResponseDto> subCategory) {

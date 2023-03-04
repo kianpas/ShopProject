@@ -20,19 +20,25 @@ public class CategoryService {
 
 	//전체 카테고리 조회
 	public List<CategoryResponseDto> findAllCategory() {
-		List<CategoryResponseDto> categoryList = categoryRepository.findAll()
+		List<CategoryResponseDto> categoryList = categoryRepository.findCategoryByDepth(0)
 											.stream()
 											.map(CategoryResponseDto::new)
 											.collect(Collectors.toList());
 
 		return categoryList;
 	}
-
-
+	
+	//메인카테고리 조회 - 테스트
+	public List<CategoryResponseDto> getMainCategory(int depth) {
+		return categoryRepository.findMainCategory(depth)
+				.stream()
+				.map(CategoryResponseDto::new)
+				.collect(Collectors.toList());
+	}
 	
 	//하위 카테고리 조회
 	public List<CategoryResponseDto> getSubCategory(int depth) {
-		return categoryRepository.findSubCategory(depth)
+		return categoryRepository.findCategoryByDepth(depth)
 				.stream()
 				.map(CategoryResponseDto::new)
 				.collect(Collectors.toList());

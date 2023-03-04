@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -34,10 +34,10 @@ public class Category {
 	@ManyToMany
 	@JoinTable(
 			name="categories_relation",
-			joinColumns = @JoinColumn(name = "child_category_id"),
-			inverseJoinColumns = @JoinColumn(name = "parent_category_id"))
-	private Set<Category> categories;
-	
+			joinColumns = @JoinColumn(name = "parent_category_id"),
+			inverseJoinColumns = @JoinColumn(name = "child_category_id"))
+	private List<Category> categories;
+
 //	@OneToOne
 //	@JoinColumn(name = "parent_id")
 //	private Category parent;
@@ -46,7 +46,7 @@ public class Category {
 //	private Set<Category> children = new HashSet<>();
 
 	@Builder
-	public Category(Long id, String name, String alias, String image, Set<Category> categories) {
+	public Category(Long id, String name, String alias, String image, List<Category> categories) {
 		this.id = id;
 		this.name = name;
 		this.alias = alias;
