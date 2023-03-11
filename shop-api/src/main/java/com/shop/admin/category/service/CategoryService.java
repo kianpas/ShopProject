@@ -19,30 +19,28 @@ public class CategoryService {
 	private final CategoryRepository categoryRepository;
 
 	//전체 카테고리 조회
-	public List<CategoryResponseDto> findAllCategory() {
-		List<CategoryResponseDto> categoryList = categoryRepository.findCategoryByDepth(0)
-											.stream()
-											.map(CategoryResponseDto::new)
-											.collect(Collectors.toList());
-
-		return categoryList;
-	}
-	
-	//메인카테고리 조회 - 테스트
-	public List<CategoryResponseDto> getMainCategory(int depth) {
-		return categoryRepository.findMainCategory(depth)
-				.stream()
-				.map(CategoryResponseDto::new)
-				.collect(Collectors.toList());
-	}
-	
-	//하위 카테고리 조회
-	public List<CategoryResponseDto> getSubCategory(int depth) {
-		return categoryRepository.findCategoryByDepth(depth)
-				.stream()
-				.map(CategoryResponseDto::new)
-				.collect(Collectors.toList());
-	}
+//	public List<CategoryResponseDto> findAllCategory() {
+// 		return categoryRepository.findCategoryByDepth(0)
+//				.stream()
+//				.map(CategoryResponseDto::new)
+//				.collect(Collectors.toList());
+//	}
+//
+//	//메인카테고리 조회 - 테스트
+//	public List<CategoryResponseDto> getMainCategory(int depth) {
+//		return categoryRepository.findMainCategory(depth)
+//				.stream()
+//				.map(CategoryResponseDto::new)
+//				.collect(Collectors.toList());
+//	}
+//
+//	//하위 카테고리 조회
+//	public List<CategoryResponseDto> getSubCategory(int depth) {
+//		return categoryRepository.findCategoryByDepth(depth)
+//				.stream()
+//				.map(CategoryResponseDto::new)
+//				.collect(Collectors.toList());
+//	}
 
 
 	//카테고리 저장

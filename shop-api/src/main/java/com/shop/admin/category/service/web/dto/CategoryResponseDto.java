@@ -28,10 +28,10 @@ public class CategoryResponseDto {
 		this.name = entity.getName();
 		this.alias = entity.getAlias();
 		this.image = entity.getImage();
-		this.subCategory = entity.getCategories()
-							.stream()
-							.map(SubCategoryResponseDto::new)
-							.collect(Collectors.toList());
+//		this.subCategory = entity.getCategories()
+//							.stream()
+//							.map(SubCategoryResponseDto::new)
+//							.collect(Collectors.toList());
 	}
 	
 //	public void setSubCategory(List<SubCategoryResponseDto> subCategory) {

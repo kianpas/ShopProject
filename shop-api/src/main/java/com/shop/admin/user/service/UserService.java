@@ -1,11 +1,11 @@
 package com.shop.admin.user.service;
 
 import com.shop.admin.user.UserRepository;
+import com.shop.admin.user.service.web.dto.UserResponseDto;
+import com.shop.admin.user.service.web.dto.UserSaveDto;
 import com.shop.admin.user.service.web.dto.UserUpdateDto;
 import com.shop.common.entity.User;
 import lombok.RequiredArgsConstructor;
-import com.shop.admin.user.service.web.dto.UserResponseDto;
-import com.shop.admin.user.service.web.dto.UserSaveDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +24,10 @@ public class UserService {
     
     //전체 조회
     public List<UserResponseDto> listAll(){
-        List<UserResponseDto> list;
-        list = userRepository.findAll()
+        return userRepository.findAll()
                 .stream()
                 .map(UserResponseDto::new)
                 .collect(Collectors.toList());
-        return list;
     }
 
     //한명 조회

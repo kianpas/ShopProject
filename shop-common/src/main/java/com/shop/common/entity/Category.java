@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,15 +27,22 @@ public class Category {
 	
 	@Column(length = 64, nullable = false)
 	private String image;
-	
+
 	private boolean enabled;
 
-	@ManyToMany
-	@JoinTable(
-			name="categories_relation",
-			joinColumns = @JoinColumn(name = "parent_category_id"),
-			inverseJoinColumns = @JoinColumn(name = "child_category_id"))
-	private List<Category> categories;
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
+	private Category parent;
+
+	@OneToMany(mappedBy = "parent")
+	private Set<Category> subCategories;
+
+//	@OneToMany
+//	@JoinTable(
+//			name="categories_relation",
+//			joinColumns = @JoinColumn(name = "parent_category_id"),
+//			inverseJoinColumns = @JoinColumn(name = "child_category_id"))
+//	private List<Category> categories;
 
 //	@OneToOne
 //	@JoinColumn(name = "parent_id")
@@ -46,11 +52,12 @@ public class Category {
 //	private Set<Category> children = new HashSet<>();
 
 	@Builder
-	public Category(Long id, String name, String alias, String image, List<Category> categories) {
+	public Category(Long id, boolean enabled, String name, String alias, String image, Set<Category> subCategories) {
 		this.id = id;
 		this.name = name;
+		this.enabled = enabled;
 		this.alias = alias;
 		this.image = image;
-		this.categories = categories;
+		this.subCategories = subCategories;
 	}
 }
