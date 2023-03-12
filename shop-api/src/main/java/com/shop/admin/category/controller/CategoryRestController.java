@@ -22,11 +22,17 @@ public class CategoryRestController {
 
 	private final CategoryService categoryService;
 
-	//전체 조회
-//	@GetMapping("/api/category/categoryList")
-//	public List<CategoryResponseDto> listAllCategory() {
-//		return categoryService.findAllCategory();
-//	}
+	//전체 카테고리 조회
+	@GetMapping("/api/category/categoriesList")
+	public List<CategoryResponseDto> listAllCategory() {
+		return categoryService.findAllCategories();
+	}
+	
+	//계층화 카테고리 조회
+	@GetMapping("/api/category/joinCategories")
+	public List<CategoryResponseDto> findJoinCategory() {
+		return categoryService.findJoinCategory();
+	}
 
 	//새 카테고리 추가
 	@PostMapping("/api/category/newCategory")
@@ -47,10 +53,7 @@ public class CategoryRestController {
 		return savedCategoryId;
 	}
 
-//	@GetMapping("/api/category/mainCategoryList/{depth}")
-//	public List<CategoryResponseDto> listMainCategory(@PathVariable int depth) {
-//		return categoryService.getMainCategory(depth);
-//	}
+
 //
 //	@GetMapping("/api/category/subcategoryList/{depth}")
 //	public List<CategoryResponseDto> listSubCategory(@PathVariable int depth) {

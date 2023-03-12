@@ -8,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataJpaTest
@@ -21,15 +23,23 @@ public class CategoryRepositoryTest {
     @Test
     public void testCreateFirstCat(){
         Category comcat = Category.builder()
-                .id(1L)
-                .alias("Computers")
+                .id(2L)
+                .alias("Electronics")
                 .enabled(false)
                 .image("test.png")
-                .name("Computers")
+                .name("Electronics")
                 .build();
+
         repo.save(comcat);
 
         assertThat(repo.save(comcat).getId()).isGreaterThan(0);
+    }
+
+    @Test
+    public void testListAllCategory(){
+        List<Category> listCategory = repo.findAll();
+
+        listCategory.forEach(category -> System.out.println(category.getId()));
     }
 
 }

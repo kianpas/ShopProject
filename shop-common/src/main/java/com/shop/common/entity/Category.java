@@ -1,9 +1,6 @@
 package com.shop.common.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +10,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Table(name = "categories")
+@ToString
 public class Category {
 	
 	@Id
@@ -37,27 +35,14 @@ public class Category {
 	@OneToMany(mappedBy = "parent")
 	private Set<Category> subCategories;
 
-//	@OneToMany
-//	@JoinTable(
-//			name="categories_relation",
-//			joinColumns = @JoinColumn(name = "parent_category_id"),
-//			inverseJoinColumns = @JoinColumn(name = "child_category_id"))
-//	private List<Category> categories;
-
-//	@OneToOne
-//	@JoinColumn(name = "parent_id")
-//	private Category parent;
-//
-//	@OneToMany(mappedBy = "parent")
-//	private Set<Category> children = new HashSet<>();
-
 	@Builder
-	public Category(Long id, boolean enabled, String name, String alias, String image, Set<Category> subCategories) {
+	public Category(Long id, boolean enabled, String name, String alias, String image, Category parent, Set<Category> subCategories) {
 		this.id = id;
 		this.name = name;
 		this.enabled = enabled;
 		this.alias = alias;
 		this.image = image;
+		this.parent = parent;
 		this.subCategories = subCategories;
 	}
 }

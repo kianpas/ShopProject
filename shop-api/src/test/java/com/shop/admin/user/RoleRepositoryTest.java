@@ -40,7 +40,7 @@ public class RoleRepositoryTest {
 		List<Role> roleList = Stream.of(roleSalesperson, roleEditor, roleShipper, roleAssistant).collect(Collectors.toList());
 		
 		System.out.println(roleList);
-//		repo.saveAll(roleList);
+		repo.saveAll(roleList);
 
 	}
 

@@ -21,22 +21,20 @@ public class CategoryResponseDto {
 	
 	private String image;
 
-	private List<SubCategoryResponseDto> subCategory;
+	private Long parentId;
+
+	private List<CategoryResponseDto> subCategory;
 	
 	public CategoryResponseDto(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();
 		this.alias = entity.getAlias();
 		this.image = entity.getImage();
-//		this.subCategory = entity.getCategories()
-//							.stream()
-//							.map(SubCategoryResponseDto::new)
-//							.collect(Collectors.toList());
+		this.parentId = entity.getParent() != null ? entity.getParent().getId() : null;
+		this.subCategory = entity.getSubCategories()
+							.stream()
+							.map(CategoryResponseDto::new)
+							.collect(Collectors.toList());
 	}
-	
-//	public void setSubCategory(List<SubCategoryResponseDto> subCategory) {
-//		this.subCategory = subCategory;
-//	}
-	
-	
+
 }
