@@ -25,17 +25,13 @@ public class Brand {
     @Column(nullable = false, length = 128)
     private String logo;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "brands_categories",
-//            joinColumns = @JoinColumn(name = "brand_id"),
-//            inverseJoinColumns = @JoinColumn(name = "category_id")
-//    )
-//    private Set<Category> categories = new HashSet<>();
+    @OneToMany(mappedBy = "category")
+    private Set<BrandsCategories> categories;
 
     @Builder
-    public Brand(String name, String logo) {
+    public Brand(String name, String logo, Set<BrandsCategories> categories) {
         this.name = name;
         this.logo = logo;
+        this.categories = categories;
     }
 }
