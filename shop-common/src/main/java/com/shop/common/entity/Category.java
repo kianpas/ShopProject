@@ -35,6 +35,9 @@ public class Category {
 	@OneToMany(mappedBy = "parent")
 	private Set<Category> subCategories;
 
+	@OneToMany(mappedBy = "brand")
+	private Set<BrandsCategories> brands;
+
 	@Builder
 	public Category(Long id, boolean enabled, String name, String alias, String image, Category parent, Set<Category> subCategories) {
 		this.id = id;

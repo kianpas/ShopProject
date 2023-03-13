@@ -1,18 +1,15 @@
 package com.shop.common.entity;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Entity
 @Table(name = "brands")
 @NoArgsConstructor
+@ToString
 public class Brand {
 
     @Id
@@ -26,12 +23,12 @@ public class Brand {
     private String logo;
 
     @OneToMany(mappedBy = "category")
-    private Set<BrandsCategories> categories;
+    private Set<BrandsCategories> brandsCategories;
 
     @Builder
-    public Brand(String name, String logo, Set<BrandsCategories> categories) {
+    public Brand(Long id, String name, String logo) {
+        this.id = id;
         this.name = name;
         this.logo = logo;
-        this.categories = categories;
     }
 }
