@@ -3,7 +3,6 @@ package com.shop.admin.category.service;
 import com.shop.admin.category.CategoryRepository;
 import com.shop.admin.category.service.web.dto.CategoryResponseDto;
 import com.shop.admin.category.service.web.dto.CategorySaveDto;
-import com.shop.admin.category.service.web.dto.SubCategoryResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

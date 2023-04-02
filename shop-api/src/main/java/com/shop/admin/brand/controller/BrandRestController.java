@@ -3,6 +3,7 @@ package com.shop.admin.brand.controller;
 import com.shop.admin.brand.service.BrandService;
 import com.shop.admin.brand.service.web.dto.BrandResponseDto;
 
+import com.shop.common.entity.Brand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,5 +20,10 @@ public class BrandRestController {
     @GetMapping("/api/brand/brandList")
     public List<BrandResponseDto> listAllCategory() {
         return brandService.findJoinBrands();
+    }
+
+    @GetMapping("/api/brand/brandListTest")
+    public List<Brand> listAllCategoryTest() {
+        return brandService.findJoinBrandsTest();
     }
 }

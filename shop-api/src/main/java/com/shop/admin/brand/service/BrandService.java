@@ -2,6 +2,7 @@ package com.shop.admin.brand.service;
 
 import com.shop.admin.brand.BrandRepository;
 import com.shop.admin.brand.service.web.dto.BrandResponseDto;
+import com.shop.common.entity.Brand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,10 @@ public class BrandService {
                 .stream()
                 .map(BrandResponseDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<Brand> findJoinBrandsTest(){
+        return brandRepository.findJoinBrand();
+
     }
 }
