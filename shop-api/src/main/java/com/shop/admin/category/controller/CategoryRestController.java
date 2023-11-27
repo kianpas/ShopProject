@@ -8,6 +8,8 @@ import com.shop.admin.util.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,19 +26,25 @@ public class CategoryRestController {
 
 	//전체 카테고리 조회
 	@GetMapping("/api/category/categoriesList")
-	public List<CategoryResponseDto> listAllCategory() {
-		return categoryService.findAllCategories();
+	public ResponseEntity<List<CategoryResponseDto>> listAllCategory() {
+		HttpHeaders resHeader = new HttpHeaders();
+		resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+		resHeader.set("resCd", "200");
+		return ResponseEntity.ok().headers(resHeader).body(categoryService.findAllCategories());
 	}
 	
 	//계층화 카테고리 조회
 	@GetMapping("/api/category/joinCategories")
-	public List<CategoryResponseDto> findJoinCategory() {
-		return categoryService.findJoinCategory();
+	public ResponseEntity<List<CategoryResponseDto>> findJoinCategory() {
+		HttpHeaders resHeader = new HttpHeaders();
+		resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+		resHeader.set("resCd", "200");
+		return ResponseEntity.ok().headers(resHeader).body(categoryService.findJoinCategory());
 	}
 
 	//새 카테고리 추가
 	@PostMapping("/api/category/newCategory")
-	public Long newCategorySave(@ModelAttribute CategorySaveDto categorySaveDto,
+	public ResponseEntity<Long> newCategorySave(@ModelAttribute CategorySaveDto categorySaveDto,
 								@RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
 		Long savedCategoryId;
 		if(file != null && !file.isEmpty() && file.getOriginalFilename() != null) {
@@ -49,10 +57,21 @@ public class CategoryRestController {
 		} else {
 			savedCategoryId = categoryService.save(categorySaveDto);
 		}
+		HttpHeaders resHeader = new HttpHeaders();
+		resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+		resHeader.set("resCd", "200");
 
-		return savedCategoryId;
+		return ResponseEntity.ok().headers(resHeader).body(savedCategoryId);
 	}
 
+	@ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<String> handleUserRuntimeExceptions(RuntimeException e){
+		log.debug("카테고리 컨트롤러에서 생긴 문제입니다. : {}", e.getMessage(), e);
+		HttpHeaders resHeader = new HttpHeaders();
+		resHeader.set(HttpHeaders.CONTENT_TYPE, "application/json");
+		resHeader.set("resCd", "405");
+		return ResponseEntity.badRequest().headers(resHeader).body(e.getMessage());
+	}
 
 //
 //	@GetMapping("/api/category/subcategoryList/{depth}")

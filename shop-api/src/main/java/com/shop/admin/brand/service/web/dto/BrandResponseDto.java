@@ -1,5 +1,6 @@
 package com.shop.admin.brand.service.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shop.admin.category.service.web.dto.CategoryResponseDto;
 import com.shop.common.entity.Brand;
 import com.shop.common.entity.BrandsCategories;
@@ -18,15 +19,20 @@ public class BrandResponseDto {
 
     private String logo;
 
-//    private List<BrandsCategories> categories;
+    private List<BrandsCategories> categories;
 
-    private Set<BrandsCategories> categories;
+    public void addBrandCategories(BrandsCategories brandsCategories){
+        categories.add(brandsCategories);
+    }
 
     public BrandResponseDto(Brand entity) {
         this.id = entity.getId();
         this.name = entity.getName();
         this.logo = entity.getLogo();
-        this.categories = entity.getBrandsCategories();
+//        this.categories = entity.getBrandsCategories()
+//                .stream()
+//                .collect(Collectors.toList());
+
 //        this.brandId =
     }
 }
