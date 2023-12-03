@@ -1,7 +1,7 @@
 package com.shop.admin.security;
 
 
-import com.shop.common.entity.User;
+import com.shop.core.entity.User;
 import com.shop.admin.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

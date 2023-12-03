@@ -1,14 +1,10 @@
 package com.shop.admin.brand.service.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shop.admin.category.service.web.dto.CategoryResponseDto;
-import com.shop.common.entity.Brand;
-import com.shop.common.entity.BrandsCategories;
+import com.shop.core.entity.Brand;
+import com.shop.core.entity.BrandsCategories;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 public class BrandResponseDto {

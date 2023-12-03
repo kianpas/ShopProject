@@ -2,8 +2,6 @@ package com.shop.admin.brand.service;
 
 import com.shop.admin.brand.BrandRepository;
 import com.shop.admin.brand.service.web.dto.BrandResponseDto;
-import com.shop.common.entity.Brand;
-import com.shop.common.entity.BrandsCategories;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

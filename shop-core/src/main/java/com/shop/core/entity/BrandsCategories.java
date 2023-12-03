@@ -1,6 +1,5 @@
-package com.shop.common.entity;
+package com.shop.core.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

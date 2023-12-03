@@ -1,9 +1,9 @@
 package com.shop.admin.brand;
 
 
-import com.shop.common.entity.Brand;
-import com.shop.common.entity.BrandsCategories;
-import com.shop.common.entity.Category;
+import com.shop.core.entity.Brand;
+import com.shop.core.entity.BrandsCategories;
+import com.shop.core.entity.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

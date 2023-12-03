@@ -4,7 +4,7 @@ import com.shop.admin.user.UserRepository;
 import com.shop.admin.user.service.web.dto.UserResponseDto;
 import com.shop.admin.user.service.web.dto.UserSaveDto;
 import com.shop.admin.user.service.web.dto.UserUpdateDto;
-import com.shop.common.entity.User;
+import com.shop.core.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

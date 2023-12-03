@@ -1,4 +1,4 @@
 rootProject.name = 'shop-project'
-include 'shop-common'
+include 'shop-core'
 include 'shop-api'
 

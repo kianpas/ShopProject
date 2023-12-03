@@ -1,7 +1,7 @@
 package com.shop.admin.user.service.web.dto;
 
-import com.shop.common.entity.Role;
-import com.shop.common.entity.User;
+import com.shop.core.entity.Role;
+import com.shop.core.entity.User;
 import lombok.Getter;
 
 import java.util.Set;

@@ -1,7 +1,7 @@
 package com.shop.admin.security;
 
-import com.shop.common.entity.Role;
-import com.shop.common.entity.User;
+import com.shop.core.entity.Role;
+import com.shop.core.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

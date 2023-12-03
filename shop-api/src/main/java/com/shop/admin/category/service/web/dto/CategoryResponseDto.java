@@ -1,13 +1,10 @@
 package com.shop.admin.category.service.web.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.shop.common.entity.Category;
+import com.shop.core.entity.Category;
 import lombok.Getter;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter

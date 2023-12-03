@@ -1,8 +1,6 @@
 package com.shop.admin.brand;
 
-import com.shop.common.entity.Brand;
-import com.shop.common.entity.BrandsCategories;
-import com.shop.common.entity.Category;
+import com.shop.core.entity.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

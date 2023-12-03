@@ -1,6 +1,6 @@
 package com.shop.admin.category.service.web.dto;
 
-import com.shop.common.entity.Category;
+import com.shop.core.entity.Category;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

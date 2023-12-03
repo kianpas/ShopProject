@@ -1,6 +1,6 @@
 package com.shop.admin.brand.service.web.dto;
 
-import com.shop.common.entity.Brand;
+import com.shop.core.entity.Brand;
 import lombok.Getter;
 
 @Getter
